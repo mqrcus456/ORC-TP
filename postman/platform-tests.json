@@ -1,1 +1,219 @@
-// TODO
+{
+  "info": {
+    "name": "E-Commerce Platform Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "PRODUCT SERVICE (8082)",
+      "item": [
+        {
+          "name": "GET - List all products",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8082/api/v1/products"
+          }
+        },
+        {
+          "name": "GET - Get product by ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8082/api/v1/products/1" // First Product
+          }
+        },
+        {
+          "name": "POST - Create product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8082/api/v1/products",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Book Java\",\n  \"description\": \"Complete Java programming book\",\n  \"price\": 39.99,\n  \"stock\": 15,\n  \"category\": \"BOOKS\"\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT - Update product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8082/api/v1/products/1",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Book Java Updated\",\n  \"description\": \"Updated Java book\",\n  \"price\": 34.99,\n  \"stock\": 20,\n  \"category\": \"BOOKS\"\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE - Delete product",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8082/api/v1/products/1"
+          }
+        },
+        {
+          "name": "GET - Search product by name",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8082/api/v1/products/search?name=Java"
+          }
+        },
+        {
+          "name": "GET - Filter by category",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8082/api/v1/products/category/BOOKS"
+          }
+        },
+        {
+          "name": "GET - Available products",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8082/api/v1/products/available"
+          }
+        },
+        {
+          "name": "PATCH - Update stock",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8082/api/v1/products/1/stock",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"stock\": 5 }"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ORDER SERVICE (8083)",
+      "item": [
+        {
+          "name": "GET - List all orders",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8083/api/v1/orders"
+          }
+        },
+        {
+          "name": "GET - Get order by ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8083/api/v1/orders/1"
+          }
+        },
+        {
+          "name": "POST - Create order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8083/api/v1/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"shippingAddress\": \"12 rue de Paris\",\n  \"items\": [\n    { \"productId\": 1, \"quantity\": 2 }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "PUT - Update order status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8083/api/v1/orders/1/status",
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"status\": \"CONFIRMED\" }"
+            }
+          }
+        },
+        {
+          "name": "DELETE - Cancel order",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8083/api/v1/orders/1"
+          }
+        },
+        {
+          "name": "GET - Orders by user",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8083/api/v1/orders/user/1"
+          }
+        },
+        {
+          "name": "GET - Orders by status",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8083/api/v1/orders/status/PENDING"
+          }
+        }
+      ]
+    },
+    {
+      "name": "ERROR SCENARIOS",
+      "item": [
+        {
+          "name": "Create order with invalid user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8083/api/v1/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 9999,\n  \"shippingAddress\": \"Invalid\",\n  \"items\": [ { \"productId\": 1, \"quantity\": 1 } ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Create order with out-of-stock product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "http://localhost:8083/api/v1/orders",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"shippingAddress\": \"Stock error\",\n  \"items\": [ { \"productId\": 1, \"quantity\": 999 } ]\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
