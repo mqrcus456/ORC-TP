@@ -1,5 +1,5 @@
-create database productdb;
-GRANT ALL PRIVILEGES ON DATABASE productdb TO product_user;
+
+CREATE SCHEMA productdb;
 
 CREATE TYPE productdb.product_category AS ENUM (
     'ELECTRONICS',
@@ -21,7 +21,7 @@ CREATE TABLE productdb.product (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO product (name, description, price, stock, category, active, created_at, updated_at)
+INSERT INTO productdb.product (name, description, price, stock, category, active, created_at, updated_at)
 VALUES
 ('Clavier mécanique', 'Clavier mécanique rétroéclairé avec touches mécaniques', 80.50, 10, 'ELECTRONICS', true, NOW(), NOW()),
 ('Souris gaming', 'Souris ergonomique pour gamers avec DPI réglable', 20.00, 25, 'ELECTRONICS', true, NOW(), NOW()),

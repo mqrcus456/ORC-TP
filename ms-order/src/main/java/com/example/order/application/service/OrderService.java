@@ -214,6 +214,5 @@ public class OrderService {
         order.setStatus(OrderStatus.CANCELLED);
         order.setUpdatedAt(LocalDateTime.now());
         orderRepository.save(order);
-        // TODO: optionally restore product stock - omitted for brevity
     }
 }
