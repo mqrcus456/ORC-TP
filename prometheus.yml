@@ -1,1 +1,50 @@
-// TODO
+// Pour chaque microservice, ajouter les choses suivantes : 
+
+pom.xml :
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-actuator</artifactId>
+  <version>3.2.5</version>
+</dependency>
+
+<dependency>
+  <groupId>io.micrometer</groupId>
+  <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>
+
+application.yml :
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+Contenu du prometheus.yml : 
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "api-gateway"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets:
+          - "localhost:8080"
+
+  - job_name: "product-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets:
+          - "localhost:8082"
+
+  - job_name: "order-service"
+    metrics_path: "/actuator/prometheus"
+    static_configs:
+      - targets:
+          - "localhost:8083"
+
+Commande :
+prometheus --config.file=prometheus.yml
