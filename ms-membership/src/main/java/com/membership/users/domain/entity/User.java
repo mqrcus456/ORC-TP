@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
  * - Builder pattern pour une construction flexible
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "accounts")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
