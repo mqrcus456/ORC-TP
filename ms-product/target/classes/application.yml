@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/productdb
-    username: product_user
-    password: product_pwd
+    url: jdbc:postgresql://localhost:5433/orchestration
+    username: orchestration_admin
+    password: admin_password
   jpa:
     hibernate:
       ddl-auto: update
