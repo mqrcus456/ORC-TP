@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+
+        # MEMBERSHIP
+        - id: membership-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/membership/** 
+          filters:
+            - StripPrefix=1
+
+        # PRODUCT
+        - id: product-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/products/**
+          filters:
+            - StripPrefix=1
+
+        # ORDER
+        - id: order-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/orders/**
+          filters:
+            - StripPrefix=1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
