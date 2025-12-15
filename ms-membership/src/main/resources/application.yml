@@ -1,37 +1,28 @@
-
 spring:
   application:
     name: users
     version: 1.0.0
 
-  # Configuration H2 Database
+  # Configuration PostgreSQL Database
   datasource:
-    url: jdbc:h2:mem:userdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
-  
-# Configuration JPA
+    url: jdbc:postgresql://localhost:5433/orchestration
+    driver-class-name: org.postgresql.Driver
+    username: orchestration_admin
+    password: admin_password
+
+  # Configuration JPA
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-  
-  # Console H2 activée pour le développement
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
 
 # Configuration du serveur
 server:
   port: ${APP_PORT:8080}
-  #servlet:
-  #  context-path: /users/api
   error:
     include-message: always
     include-binding-errors: always
@@ -43,22 +34,19 @@ server:
 
 # Configuration Actuator
 management:
-  # Exposition des endpoints
   endpoints:
     web:
       exposure:
         include: health,info,metrics,prometheus,env,loggers
       base-path: /actuator
-  
-  # Configuration du Health Check
+
   endpoint:
     health:
       show-details: always
       show-components: always
       probes:
-        enabled: true # Pour Kubernetes liveness et readiness
-  
-  # Health indicators détaillés
+        enabled: true
+
   health:
     defaults:
       enabled: true
@@ -69,8 +57,7 @@ management:
       enabled: true
     ping:
       enabled: true
-  
-  # Configuration des métriques
+
   metrics:
     enable:
       jvm: true
@@ -85,14 +72,12 @@ management:
     tags:
       application: ${spring.application.name}
       environment: dev
-  
-  # Configuration Prometheus
+
   prometheus:
     metrics:
       export:
         enabled: true
-  
-  # Informations de l'application (endpoint /actuator/info)
+
   info:
     env:
       enabled: true
@@ -128,4 +113,3 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-
