@@ -1,0 +1,10 @@
+com\example\product\domain\repository\ProductRepository.class
+com\example\product\infrastructure\web\controller\ProductController.class
+com\example\product\application\dto\ProductResponse.class
+com\example\product\application\dto\ProductRequest.class
+com\example\product\infrastructure\health\ProductStockHealthIndicator.class
+com\example\product\application\mapper\ProductMapper.class
+com\example\product\application\service\ProductService.class
+com\example\product\domain\entity\ProductCategory.class
+com\example\product\infrastructure\exception\RestExceptionHandler.class
+com\example\product\domain\entity\Product.class
