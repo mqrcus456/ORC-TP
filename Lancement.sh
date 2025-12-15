@@ -25,15 +25,15 @@ stop_services() {
 }
 
 # Lancer les services
-start_service "/chemin/vers/ms-product"
+start_service "/ORC-TP1/ms-product"
 echo "Attente 30 secondes pour s'assurer que ms-product est bien lancé"
 sleep 30  # Attendre 30 secondes pour donner du temps au service product
 
-start_service "/chemin/vers/ms-order"
+start_service "/ORC-TP1/ms-order"
 echo "Attente 30 secondes pour s'assurer que ms-order est bien lancé"
 sleep 30  # Attendre 30 secondes pour donner du temps au service order
 
-start_service "/chemin/vers/ms-membership"
+start_service "/ORC-TP1/ms-membership"
 echo "Attente 30 secondes pour s'assurer que ms-membership est bien lancé"
 sleep 30  # Attendre 30 secondes pour donner du temps au service membership
 
