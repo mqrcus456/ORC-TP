@@ -3,26 +3,23 @@ spring:
     name: users
     version: 1.0.0
 
-  # Configuration PostgreSQL Database
   datasource:
     url: jdbc:postgresql://localhost:5433/orchestration
     driver-class-name: org.postgresql.Driver
     username: orchestration_admin
     password: admin_password
 
-  # Configuration JPA
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+      show_sql: true
     properties:
       hibernate:
         format_sql: true
 
-# Configuration du serveur
 server:
-  port: ${APP_PORT:8080}
+  port: ${APP_PORT:8081} # Port par défaut 8081
   error:
     include-message: always
     include-binding-errors: always
@@ -32,13 +29,12 @@ server:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
 
-# Configuration Actuator
 management:
   endpoints:
     web:
+      base-path: /actuator
       exposure:
         include: health,info,metrics,prometheus,env,loggers
-      base-path: /actuator
 
   endpoint:
     health:
@@ -89,7 +85,6 @@ management:
       enabled: true
       mode: full
 
-# Informations personnalisées pour /actuator/info
 info:
   app:
     name: ${spring.application.name}
@@ -102,7 +97,6 @@ info:
     email: support@esipen.com
     team: Architecture Team
 
-# Configuration des logs
 logging:
   level:
     root: INFO
