@@ -1,0 +1,219 @@
+openapi: 3.0.3
+info:
+  title: Membership Service API
+  description: API de gestion des utilisateurs (microservice Membership)
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8081
+    description: Membership Service
+
+tags:
+  - name: Users
+    description: API de gestion des utilisateurs
+
+paths:
+
+  /api/v1/users:
+    get:
+      tags: [Users]
+      summary: Récupérer tous les utilisateurs
+      description: Retourne la liste complète de tous les utilisateurs enregistrés
+      responses:
+        '200':
+          description: Liste récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+
+    post:
+      tags: [Users]
+      summary: Créer un nouvel utilisateur
+      description: Crée un nouvel utilisateur avec les données fournies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: Utilisateur créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Données invalides
+        '409':
+          description: L'utilisateur existe déjà
+
+  /api/v1/users/{id}:
+    get:
+      tags: [Users]
+      summary: Récupérer un utilisateur par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Utilisateur trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Utilisateur non trouvé
+
+    put:
+      tags: [Users]
+      summary: Mettre à jour un utilisateur
+      description: Met à jour complètement les informations d'un utilisateur existant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: Utilisateur mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Données invalides
+        '404':
+          description: Utilisateur non trouvé
+        '409':
+          description: Conflit avec un utilisateur existant
+
+    delete:
+      tags: [Users]
+      summary: Supprimer un utilisateur
+      description: Supprime définitivement un utilisateur
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Utilisateur supprimé avec succès
+        '404':
+          description: Utilisateur non trouvé
+
+  /api/v1/users/search:
+    get:
+      tags: [Users]
+      summary: Rechercher des utilisateurs par nom
+      description: Recherche des utilisateurs dont le nom contient la chaîne spécifiée
+      parameters:
+        - name: lastName
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recherche effectuée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+
+  /api/v1/users/active:
+    get:
+      tags: [Users]
+      summary: Récupérer les utilisateurs actifs
+      description: Retourne la liste de tous les utilisateurs actifs
+      responses:
+        '200':
+          description: Liste récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+
+  /api/v1/users/{id}/deactivate:
+    patch:
+      tags: [Users]
+      summary: Désactiver un utilisateur
+      description: Désactive un utilisateur sans le supprimer définitivement
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Utilisateur désactivé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '404':
+          description: Utilisateur non trouvé
+
+components:
+  schemas:
+
+    UserRequest:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+      properties:
+        firstName:
+          type: string
+          minLength: 2
+        lastName:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+        active:
+          type: boolean
+          default: true
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          format: email
+        active:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
