@@ -1,0 +1,12 @@
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\domain\entity\Product.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\application\service\ProductService.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\client\OrderClient.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\exception\RestExceptionHandler.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\application\dto\ProductResponse.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\web\controller\ProductController.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\application\dto\ProductRequest.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\ProductApplication.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\domain\entity\ProductCategory.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\domain\repository\ProductRepository.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\application\mapper\ProductMapper.java
+C:\THE_REPO\EPISEN\ING3\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\health\ProductStockHealthIndicator.java
