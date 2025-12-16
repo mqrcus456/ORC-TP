@@ -123,6 +123,8 @@ public class OrderService {
         order.setStatus(OrderStatus.PENDING);
         order.setShippingAddress(request.getShippingAddress());
         order.setCreatedAt(LocalDateTime.now());
+        order.setUpdatedAt(LocalDateTime.now());
+        
 
         BigDecimal totalAmount = BigDecimal.ZERO;
 

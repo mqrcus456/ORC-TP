@@ -32,6 +32,25 @@ public class ProductController {
     public ProductResponse one(@PathVariable Long id) {
         return ProductMapper.toResponse(service.findById(id));
     }
+    @GetMapping("/search")
+    public List<ProductResponse> search(@RequestParam String name) {
+        return service.searchByName(name).stream()
+                .map(ProductMapper::toResponse)
+                .toList();
+    }
+
+    @GetMapping("/category/{category}")
+    public List<ProductResponse> byCategory(@PathVariable ProductCategory category) {
+        return service.findByCategory(category).stream()
+                .map(ProductMapper::toResponse)
+                .toList();
+    }
+    @GetMapping("/available")
+    public List<ProductResponse> available() {
+        return service.findAvailable().stream()
+                .map(ProductMapper::toResponse)
+                .toList();
+    }
 
     @PostMapping
     public ProductResponse create(@Valid @RequestBody ProductRequest request) {
