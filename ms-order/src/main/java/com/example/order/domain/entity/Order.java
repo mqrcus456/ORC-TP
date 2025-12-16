@@ -23,7 +23,7 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "shop.order_status")
-    @JdbcTypeCode(SqlTypes.VARCHAR)  // <- correct mapping ENUM -> VARCHAR
+    @JdbcTypeCode(SqlTypes.VARCHAR)  // correct mapping ENUM -> VARCHAR
     private OrderStatus status;
 
     private BigDecimal totalAmount;
@@ -63,4 +63,23 @@ public class Order {
     public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
+
+    // --- Ajout des callbacks automatiques pour dates ---
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+        if (this.orderDate == null) {
+            this.orderDate = now;
+        }
+        if (this.status == null) {
+            this.status = OrderStatus.PENDING; // valeur par défaut
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

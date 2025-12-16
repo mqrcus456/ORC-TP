@@ -1,6 +1,7 @@
 package com.example.product.application.service;
 
 import com.example.product.domain.entity.Product;
+import com.example.product.domain.entity.ProductCategory;
 import com.example.product.domain.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +30,26 @@ public class ProductService {
     public Product save(Product product) {
         return repository.save(product);
     }
+    public List<Product> findAvailable() {
+    return repository.findByStockGreaterThan(0);
+    }
 
     public void delete(Long id) {
         // règle métier : ici on vérifierait les commandes
         repository.deleteById(id);
     }
 
-    public void updateStock(Long id, int stock) {
-        if (stock < 0) throw new IllegalArgumentException("Stock négatif interdit");
+    public void updateStock(Long id, int quantityToDecrease) {
         Product p = findById(id);
-        p.setStock(stock);
+        int newStock = p.getStock() - quantityToDecrease;
+        if (newStock < 0) throw new IllegalArgumentException("Stock insuffisant");
+        p.setStock(newStock);
     }
+    public List<Product> searchByName(String name) {
+    return repository.findByNameContainingIgnoreCase(name);
+    }
+    public List<Product> findByCategory(ProductCategory category) {
+    return repository.findByCategory(category);
+    }
+
 }
