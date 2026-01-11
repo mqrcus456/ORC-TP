@@ -2,7 +2,7 @@
 
 ## Architecture de sécurité
 
-### Diagramme de séquence de l'authentification
+### Diagramme de séquence de l'authentification : ![alttext](ORC-TP2-SequenceAuth.png)
 
 ### Composants implémentés
 
@@ -91,44 +91,12 @@
 - Erreurs de communication inter-services
 
 ## Tests
-
+Voir le fichier postman/platform-secured.json et copier les tests sur postman.
 ### Scénario 1 : Connexion réussie
-```bash
-POST /api/v1/auth/login
-{
-  "email": "alice.dupont@example.com",
-  "password": "password123"
-}
-
-Response: 200 OK
-{
-  "token": "eyJhbGciOiJSUzI1NiJ9...",
-  "expiresIn": 3600
-}
-```
-
 ### Scénario 2 : Accès protégé avec token valide
-```bash
-GET /api/v1/products
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9...
-
-Response: 200 OK
-```
-
 ### Scénario 3 : Accès sans token
-```bash
-GET /api/v1/products
-
-Response: 401 Unauthorized
-```
-
 ### Scénario 4 : Token expiré
-```bash
-GET /api/v1/products
-Authorization: Bearer eyJhbGciOiJSUzI1NiJ9... (expiré)
-
-Response: 401 Unauthorized
-```
+### Scénario 5 : Création commande complète
 
 ## Déploiement
 
