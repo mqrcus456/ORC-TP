@@ -1,15 +1,15 @@
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\web\controller\ProductController.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\application\service\ProductService.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\exception\RestExceptionHandler.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\client\OrderClient.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\domain\entity\ProductCategory.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\security\JWTValidator.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\application\dto\ProductResponse.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\health\ProductStockHealthIndicator.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\application\dto\ProductRequest.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\domain\entity\Product.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\security\SecurityConfig.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\domain\repository\ProductRepository.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\application\mapper\ProductMapper.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\infrastructure\security\JWTAuthenticationFilter.java
-C:\Users\chaou\OneDrive\Bureau\EPISEN\ING3\ING3 - DATA - ORC\ORC-TP1\ms-product\src\main\java\com\example\product\ProductApplication.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/application/dto/ProductRequest.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/web/controller/ProductController.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/security/JWTAuthenticationFilter.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/domain/repository/ProductRepository.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/domain/entity/ProductCategory.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/client/OrderClient.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/exception/RestExceptionHandler.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/security/SecurityConfig.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/security/JWTValidator.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/domain/entity/Product.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/application/mapper/ProductMapper.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/application/dto/ProductResponse.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/application/service/ProductService.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/ProductApplication.java
+/mnt/c/Users/ASUS/OneDrive/Documents/Cours/ING3/Orchestration/ORC-TP1/ms-product/src/main/java/com/example/product/infrastructure/health/ProductStockHealthIndicator.java

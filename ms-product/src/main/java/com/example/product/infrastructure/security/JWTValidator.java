@@ -1,90 +1,96 @@
 package com.example.product.infrastructure.security;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import org.springframework.web.client.RestTemplate;
+import jakarta.annotation.PostConstruct;
 import java.security.KeyFactory;
-import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
 
 @Slf4j
 @Component
 public class JWTValidator {
 
-    private static final String PUBLIC_KEY_FILE = "public_key.pem";
+    private RSAPublicKey publicKey;
+
+    private static final String MEMBERSHIP_PUBLIC_KEY_URL = "http://localhost:8081/api/v1/public-key";
 
     /**
-     * Charge la clé publique depuis le fichier.
+     * Récupère la clé publique depuis Membership au démarrage
      */
-    private RSAPublicKey loadPublicKey() {
+    @PostConstruct
+    public void loadKeyFromMembership() {
         try {
-            byte[] keyBytes = Files.readAllBytes(Paths.get(PUBLIC_KEY_FILE));
-            X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            return (RSAPublicKey) keyFactory.generatePublic(spec);
-        } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException e) {
-            log.error("Erreur lors du chargement de la clé publique", e);
-            throw new RuntimeException("Erreur lors du chargement de la clé publique", e);
+            log.info("Récupération de la clé publique depuis Membership...");
+            String keyBase64 = new RestTemplate().getForObject(MEMBERSHIP_PUBLIC_KEY_URL, String.class);
+            byte[] decoded = Base64.getDecoder().decode(keyBase64);
+
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            publicKey = (RSAPublicKey) kf.generatePublic(spec);
+
+            log.info("Clé publique récupérée avec succès");
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération de la clé publique", e);
+            throw new RuntimeException(e);
         }
     }
 
     /**
-     * Valide un JWT et retourne les claims.
+     * Valide le token JWT et retourne les Claims
      */
     public Claims validateToken(String token) {
         try {
-            RSAPublicKey publicKey = loadPublicKey();
-            return Jwts.parser()
+            // ✅ Avec JJWT, parser + setSigningKey + build est ok
+            Jws<Claims> jws = Jwts.parser()
                     .setSigningKey(publicKey)
                     .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+                    .parseClaimsJws(token);
+
+            return jws.getBody();
         } catch (ExpiredJwtException e) {
             log.warn("Token expiré: {}", e.getMessage());
             throw new JwtException("Token expiré", e);
-        } catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
+        } catch (JwtException e) {
             log.warn("Token invalide: {}", e.getMessage());
-            throw new JwtException("Token invalide", e);
+            throw e;
         }
     }
 
     /**
-     * Extrait l'ID utilisateur du token.
+     * Extrait l'ID utilisateur du token
      */
     public Long extractUserId(String token) {
-        Claims claims = validateToken(token);
-        return claims.get("userId", Long.class);
+        return validateToken(token).get("userId", Long.class);
     }
 
     /**
-     * Extrait l'email du token.
+     * Extrait l'email du token
      */
     public String extractEmail(String token) {
-        Claims claims = validateToken(token);
-        return claims.getSubject();
+        return validateToken(token).getSubject();
     }
 
     /**
-     * Extrait les rôles du token.
+     * Extrait les rôles du token
      */
     public String extractRoles(String token) {
-        Claims claims = validateToken(token);
-        return claims.get("roles", String.class);
+        return validateToken(token).get("roles", String.class);
     }
 
     /**
-     * Vérifie si le token est expiré.
+     * Vérifie si le token est expiré
      */
     public boolean isTokenExpired(String token) {
         try {
-            Claims claims = validateToken(token);
-            return claims.getExpiration().before(new java.util.Date());
+            return validateToken(token).getExpiration().before(new java.util.Date());
         } catch (JwtException e) {
             return true;
         }
