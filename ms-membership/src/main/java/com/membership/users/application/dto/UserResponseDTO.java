@@ -10,10 +10,6 @@ import java.time.LocalDateTime;
 
 /**
  * DTO pour la réponse d'un utilisateur.
- * Best practices :
- * - Séparation Request/Response
- * - Formatage JSON cohérent pour les dates
- * - Exposition sélective des champs (pas de données sensibles)
  */
 @Data
 @NoArgsConstructor

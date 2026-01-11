@@ -10,11 +10,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * DTO pour la création d'un utilisateur.
- * Best practices :
- * - Séparation des DTOs Request/Response
- * - Validation au niveau DTO
- * - Utilisation de Builder pattern
- * - Pas d'exposition de l'entité directement dans l'API
  */
 @Data
 @NoArgsConstructor
@@ -33,4 +28,8 @@ public class UserRequestDTO {
     @NotBlank(message = "L'email ne peut pas être vide")
     @Email(message = "L'email doit être valide")
     private String email;
+
+    @NotBlank(message = "Le mot de passe ne peut pas être vide")
+    @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
+    private String password;
 }

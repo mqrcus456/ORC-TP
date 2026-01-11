@@ -48,6 +48,11 @@ public class User {
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
+    @NotBlank(message = "Le mot de passe ne peut pas être vide")
+    @Size(min = 8, message = "Le mot de passe doit contenir au moins 8 caractères")
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
+
     @Column(name = "active")
     private Boolean active = true;
 
