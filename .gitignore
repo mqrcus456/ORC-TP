@@ -1,0 +1,7 @@
+# Maven target directories
+ms-order/target/
+ms-product/target/
+
+# Prometheus data and exe
+prometheus/data/
+prometheus/prometheus.exe
