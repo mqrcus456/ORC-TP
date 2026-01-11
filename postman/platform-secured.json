@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "E-Commerce Platform - JWT Security Test Scenarios (Direct Services)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_description": "JWT security scenarios calling services directly (without API Gateway)\n\n⚠️ IMPORTANT: Après avoir exécuté le scénario 1 (Login), copiez le token JWT de la réponse et remplacez 'YOUR_JWT_TOKEN_HERE' dans les scénarios 2 et 5.\nPour le scénario 4, utilisez un token expiré ou attendez l'expiration naturelle (1 heure).\n\nPorts utilisés :\n- Membership Service (auth): 8081\n- Product Service: 8082\n- Order Service: 8083"
+  },
+  "item": [
+    {
+      "name": "1. Login → Récupération du token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "http://localhost:8081/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Appel Product avec token → 200 OK",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer YOUR_JWT_TOKEN_HERE"
+          }
+        ],
+        "url": "http://localhost:8082/api/v1/products"
+      }
+    },
+    {
+      "name": "3. Appel Product sans token → 401 Unauthorized",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:8082/api/v1/products"
+      }
+    },
+    {
+      "name": "4. Appel Order avec token expiré → 403 Forbidden",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer EXPIRED_JWT_TOKEN_HERE"
+          }
+        ],
+        "url": "http://localhost:8083/api/v1/orders"
+      }
+    },
+    {
+      "name": "5. Création commande complète (avec token valide)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer YOUR_JWT_TOKEN_HERE"
+          }
+        ],
+        "url": "http://localhost:8083/api/v1/orders",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 1,\n  \"shippingAddress\": \"123 Test Street\",\n  \"items\": [\n    {\n      \"productId\": 1,\n      \"quantity\": 2\n    }\n  ]\n}"
+        }
+      }
+    }
+  ]
+}
