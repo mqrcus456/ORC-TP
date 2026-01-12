@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com\example\order\infrastructure\client\UserClient.class
 com\example\order\infrastructure\web\controller\OrderController.class
 com\example\order\application\dto\OrderItemResponse.class
@@ -16,3 +17,23 @@ com\example\order\infrastructure\client\ProductClient.class
 com\example\order\domain\entity\Order.class
 com\example\order\application\dto\CreateOrderRequest.class
 com\example\order\infrastructure\exception\RestExceptionHandler.class
+=======
+com/example/order/application/dto/OrderItemResponse.class
+com/example/order/infrastructure/web/controller/OrderController.class
+com/example/order/application/dto/OrderItemRequest.class
+com/example/order/domain/entity/OrderStatus.class
+com/example/order/domain/repository/OrderRepository.class
+com/example/order/infrastructure/security/JWTAuthenticationFilter.class
+com/example/order/domain/entity/Order.class
+com/example/order/infrastructure/exception/RestExceptionHandler.class
+com/example/order/infrastructure/health/ExternalServicesHealthIndicator.class
+com/example/order/domain/entity/OrderItem.class
+com/example/order/application/dto/CreateOrderRequest.class
+com/example/order/OrderApplication.class
+com/example/order/application/service/OrderService.class
+com/example/order/infrastructure/client/ProductClient.class
+com/example/order/infrastructure/security/JWTValidator.class
+com/example/order/application/dto/OrderResponse.class
+com/example/order/infrastructure/client/UserClient.class
+com/example/order/infrastructure/security/SecurityConfig.class
+>>>>>>> f3e82cd3d266c12596fa197810612cb1aa200954
