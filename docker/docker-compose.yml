@@ -1,0 +1,90 @@
+services:
+
+  # ────────────────────
+  # MEMBERSHIP
+  # ────────────────────
+  ms-membership:
+    image: baguettebaguette/ms-membership:latest
+    container_name: ms-membership
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://membership-db:5432/membership
+      SPRING_DATASOURCE_USERNAME: membership_admin
+      SPRING_DATASOURCE_PASSWORD: admin_password
+    ports:
+      - "8081:8081"
+    depends_on:
+      - membership-db
+
+  membership-db:
+    image: postgres:15
+    container_name: membership-db
+    environment:
+      - POSTGRES_DB=membership
+      - POSTGRES_USER=membership_admin
+      - POSTGRES_PASSWORD=admin_password
+    volumes:
+      - membership-data:/var/lib/postgresql/data
+      - ../ms-membership/src/main/resources/data.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  # ────────────────────
+  # ORDER
+  # ────────────────────
+  ms-order:
+    image: baguettebaguette/ms-order:latest
+    container_name: ms-order
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://order-db:5432/order
+      - SPRING_DATASOURCE_USERNAME=order_admin
+      - SPRING_DATASOURCE_PASSWORD=admin_password
+    ports:
+      - "8083:8083"
+    depends_on:
+      - order-db
+
+
+  order-db:
+    image: postgres:15
+    container_name: order-db
+    environment:
+      - POSTGRES_DB=order
+      - POSTGRES_USER=order_admin
+      - POSTGRES_PASSWORD=admin_password
+    volumes:
+      - order-data:/var/lib/postgresql/data
+      - ../ms-order/src/main/resources/data.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  # ────────────────────
+  # PRODUCT
+  # ────────────────────
+  ms-product:
+    image: baguettebaguette/ms-product:latest
+    container_name: ms-product
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://product-db:5432/product
+      - SPRING_DATASOURCE_USERNAME=product_admin
+      - SPRING_DATASOURCE_PASSWORD=admin_password
+    ports:
+      - "8082:8082"
+    depends_on:
+      - product-db
+
+  product-db:
+    image: postgres:15
+    container_name: product-db
+    environment:
+      - POSTGRES_DB=product
+      - POSTGRES_USER=product_admin
+      - POSTGRES_PASSWORD=admin_password
+    volumes:
+      - product-data:/var/lib/postgresql/data
+      - ../ms-product/src/main/resources/data.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+
+volumes:
+  membership-data:
+  product-data:
+  order-data:
+  grafana-data:

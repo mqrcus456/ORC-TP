@@ -1,0 +1,9 @@
+FROM postgres:16
+
+ENV POSTGRES_USER=shop
+ENV POSTGRES_PASSWORD=admin
+ENV POSTGRES_DB=shop
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+EXPOSE 5432
